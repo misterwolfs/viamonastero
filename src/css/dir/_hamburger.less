@@ -1,0 +1,141 @@
+/* =========================================================================
+ * Hamburger w/ animation
+ * =========================================================================
+ */
+ 
+        // ! 1 Dependency - mixins.less !
+ 
+        // HTML MARKUP
+        //      <a id="hamburger">
+        //              <span class="lines"></span>
+        //      </a>
+       
+        // JAVASCRIPT
+        //      $( "a#hamburger" ).on( "click", function() {
+        //               $( this ).toggleClass( "close" );
+        //      });
+       
+        /* =========================================================================
+         * Necessary mixins -- not provided in mixins.less
+         * =========================================================================
+         */
+       
+                // Scale3D
+                .scale3d(@x, @y, @z) {
+                  -webkit-transform: scale3d(@x, @y, @z);
+                         -moz-transform: scale3d(@x, @y, @z);
+                          -ms-transform: scale3d(@x, @y, @z);
+                           -o-transform: scale3d(@x, @y, @z);
+                                  transform: scale3d(@x, @y, @z);
+                }
+               
+                .rotate3d(@x, @y, @z, @angle) {
+                                -webkit-transform: rotate3d(@x, @y, @z, @angle);
+                                   -moz-transform: rotate3d(@x, @y, @z, @angle);
+                                        -ms-transform: rotate3d(@x, @y, @z, @angle);
+                                         -o-transform: rotate3d(@x, @y, @z, @angle);
+                                                transform: rotate3d(@x, @y, @z, @angle);
+                }
+               
+ 
+        /* =========================================================================
+         * Variables
+         * =========================================================================
+         */
+       
+                @borderRadius:          0;
+                @lineColor:             #fff;
+                @speed:                         .4s;
+                @rotation:                      45deg;
+                @buttonSize:            2rem;
+                @backgroundColor:       transparent;
+                @hoverColor:            @darkgrey;
+               
+        /* =========================================================================
+         * Non-clicked state
+         * =========================================================================
+         */
+       
+                // common to all three-liners
+                #hamburger {
+                  display: inline-block;
+                  padding: @buttonSize/3 0;
+                  cursor: pointer;
+                  &:hover, &:focus {
+                        .opacity(100);
+                        .lines {
+                                background: @hoverColor;
+                                &:before, &:after {
+                                        background: @hoverColor;
+                                }
+                        }
+                       
+                  }
+                  &:active {
+                        .transition-reset();
+                  }
+                }
+               
+                //common to all three-liners
+                .line() {
+                  display: inline-block;
+                  width: @buttonSize;
+                  height: @buttonSize/7;
+                  background: @lineColor;
+                  .border-radius(@borderRadius);
+                  .transition(all @speed ease);
+                }
+                //common to all three-liners
+                .lines {
+                  .line();
+                  position: relative;
+ 
+                  &:before, &:after {
+                   .line();
+                        position: absolute;
+                        left:0;
+                        content: '';
+                       
+                        transform-origin: @buttonSize/14 center;
+                        -ms-transform-origin: @buttonSize/14 center; /* IE 9 */
+                        -webkit-transform-origin:@buttonSize/14 center; /* Chrome, Safari, Opera */
+                        -webkit-transform-origin: @buttonSize/14 center;
+                  }
+                  &:before {
+                        top: @buttonSize/4;
+                  }
+                  &:after {
+                        top: -@buttonSize/4;
+                  }
+                }
+ 
+                #hamburger.close {
+                        .scale3d(.8,.8,.8);
+                }
+               
+        /* =========================================================================
+         * Clicked state -- close class
+         * =========================================================================
+         */
+               
+                #hamburger.close{
+                  .lines {
+                        background: transparent;
+                        height: 0;
+                        &:before, &:after{
+                                transform-origin: 50% 50%;
+                                -ms-transform-origin: 50% 50%; /* IE 9 */
+                                -webkit-transform-origin: 50% 50%; /* Chrome, Safari, Opera */
+                                -webkit-transform-origin: 50% 50%;
+                                top:0;
+                                width: @buttonSize;
+                                background: @hoverColor;
+                        }
+                        &:before{
+                                .rotate3d(0,0,1,45deg);
+                        }
+                        &:after{
+                                .rotate3d(0,0,1,-45deg);
+                        }
+                  }
+                }

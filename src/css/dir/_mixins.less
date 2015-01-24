@@ -1,0 +1,485 @@
+// -- Usefull mixins -- //
+//
+// version: 1.01
+// date: 05/12/2012
+// update: 12/02/2013
+ 
+ 
+// -- Debug Media Query -- //
+// Based on: Johan Brook -  http://johanbrook.com/design/css/debugging-css-media-queries/
+//
+// Use inside a media query for debugging -> will show the given message whenever
+// the media query is triggered
+//
+// Using the second @debug parameter from the example below allows you to disable all
+// debug queries at once by setting the @debug variable to 0. Don't forget to this
+// this before deployment!
+//
+// Example:
+// @media (min-width: 481px) and (max-width: 767px) {
+//    .debug-media-query('Landscape phone to portrait tablet', @debug);
+//      ...
+// }
+//
+.debug-media-query(@message, @guard) when (@guard > 0) { // when second parameter greater then 0
+   body:before{
+      content: @message;
+      font-weight: bold;
+      display: block;
+      text-align: center;
+      background: rgba(255, 0, 0 , 0.5);
+      color: rgba(0, 255, 0, 0.7);
+      position: absolute;  
+      right: 0;
+      left: 0;
+      top: 0;
+      z-index: 99;
+      padding: 20px;
+      font-size: 20px;
+   }
+}
+.debug-media-query(@message, @guard) { // when second parameter not greater then 0
+   // do nothing
+}
+ 
+ 
+// Cross Browser CSS3 Properties
+// Source: Twitter bootstrap - https://github.com/twitter/bootstrap/tree/master/less
+ 
+// -- Border Radius -- //
+// Set the border radius
+//
+// Example:
+// div.boxWithDefaultRadius {
+//    .border-radius();
+// }
+// div.boxWithCustomRadius {
+//    .border-radius(5px);
+// }
+//
+ 
+// All Corners
+.border-radius(@radius:@defaultBorderRadius) {
+  -webkit-border-radius: @radius;
+     -moz-border-radius: @radius;
+          border-radius: @radius;
+}
+ 
+// Single Corner Border Radius
+.border-top-left-radius(@radius:@defaultBorderRadius) {
+  -webkit-border-top-left-radius: @radius;
+      -moz-border-radius-topleft: @radius;
+          border-top-left-radius: @radius;
+}
+.border-top-right-radius(@radius:@defaultBorderRadius) {
+  -webkit-border-top-right-radius: @radius;
+      -moz-border-radius-topright: @radius;
+          border-top-right-radius: @radius;
+}
+.border-bottom-right-radius(@radius:@defaultBorderRadius) {
+  -webkit-border-bottom-right-radius: @radius;
+      -moz-border-radius-bottomright: @radius;
+          border-bottom-right-radius: @radius;
+}
+.border-bottom-left-radius(@radius) {
+  -webkit-border-bottom-left-radius: @radius;
+      -moz-border-radius-bottomleft: @radius;
+          border-bottom-left-radius: @radius;
+}
+ 
+// Single Side Border Radius
+.border-top-radius(@radius:@defaultBorderRadius) {
+  .border-top-right-radius(@radius);
+  .border-top-left-radius(@radius);
+}
+.border-right-radius(@radius:@defaultBorderRadius) {
+  .border-top-right-radius(@radius);
+  .border-bottom-right-radius(@radius);
+}
+.border-bottom-radius(@radius:@defaultBorderRadius) {
+  .border-bottom-right-radius(@radius);
+  .border-bottom-left-radius(@radius);
+}
+.border-left-radius(@radius:@defaultBorderRadius) {
+  .border-top-left-radius(@radius);
+  .border-bottom-left-radius(@radius);
+}
+ 
+// -- Drop Shadows -- //
+//
+// You can provide an infinite amount of box shadows!
+// More info on the use of multiple box-shadows can be found here:
+// http://www.css3.info/preview/box-shadow/
+//
+// Example:
+// div.boxWithDefaultShadow {
+//    .box-shadow();
+// }
+// div.boxWithMultipleShadows {
+//    .box-shadow(inset 0 0 2px rgba(0,0,0,0.3), 0 1px 0 #ffffff);
+// }
+//
+ 
+.box-shadow(@shadowA:@defaultBoxShadow, @shadowB:X, ...){
+  @props: ~`"@{arguments}".replace(/[\[\]]|\,\sX/g, '')`;
+  -webkit-box-shadow: @props;
+     -moz-box-shadow: @props;
+       -o-box-shadow: @props;
+          box-shadow: @props;
+}
+ 
+// -- Text Shadows -- //
+//
+// You can provide an infinite amount of text shadows!
+//
+// Example:
+// div.boxWithDefaultShadow {
+//    .text-shadow();
+// }
+// div.boxTextMultipleShadows {
+//    .text-shadow(0 0 2px rgba(0,0,0,0.3), 0 1px 0 #ffffff);
+// }
+//
+ 
+.text-shadow(@shadowA:@defaultTextShadow, @shadowB:X, ...){
+  @props: ~`"@{arguments}".replace(/[\[\]]|\,\sX/g, '')`;
+  -webkit-text-shadow: @props;
+     -moz-text-shadow: @props;
+       -o-text-shadow: @props;
+          text-shadow: @props;
+}
+ 
+ 
+// -- Transitions -- //
+//
+// You can define an infinite number of transitions!
+// More information on css3 transitions can be found here:
+// http://www.css3.info/preview/css3-transitions/
+//
+// easing options: [linear, ease, ease-in, ease-out, ease-in-out]
+//
+// Example:
+// div.customTransitions {
+//    transition(color ease 1s 2s, top linear .5s);
+// }
+// div.defaultTransition {
+//    .transition;
+// }
+//
+.transition(@transitionA:@defaultTransition, @transitionB:X, ...){
+  @props: ~`"@{arguments}".replace(/[\[\]]|\,\sX/g, '')`;
+  -webkit-transition: @props;
+     -moz-transition: @props;
+       -o-transition: @props;
+          transition: @props;
+}
+ 
+// To set a transition delay.
+// You can also provide a delay in the default .transition() mixin,
+// but this allows you to overwrite or set the delay for all the
+// transitions at once
+//
+.transition-delay(@transition-delay:@defaultTransitionDelay) {
+  -webkit-transition-delay: @transition-delay;
+     -moz-transition-delay: @transition-delay;
+       -o-transition-delay: @transition-delay;
+          transition-delay: @transition-delay;
+}
+ 
+// To reset all previously set transitions
+.transition-reset {
+   .transition(all 0s);
+}
+ 
+// -- Transformations -- //
+// More information on CSS transformations can be found here:
+// https://developer.mozilla.org/en-US/docs/CSS/transform
+//
+// Rotate
+// Expects a value in degrees (base 360). Don't forget to add 'deg' after your
+// value. Negative values are allowed.
+//
+// Example:
+// .rotate(45deg);
+//
+.rotate(@degrees) {
+  -webkit-transform: rotate(@degrees);
+     -moz-transform: rotate(@degrees);
+      -ms-transform: rotate(@degrees);
+       -o-transform: rotate(@degrees);
+          transform: rotate(@degrees);
+}
+ 
+// Scale
+// Expects a factor by which the size of the element will be multiplied
+// Values between 0 and 1 will reduce the size
+// Values greater then 1 wil increase the size
+//
+// Example:
+// .scale(0.5);
+//
+.scale(@ratio) {
+  -webkit-transform: scale(@ratio);
+     -moz-transform: scale(@ratio);
+      -ms-transform: scale(@ratio);
+       -o-transform: scale(@ratio);
+          transform: scale(@ratio);
+}
+ 
+// Translate
+// Will move your content with the given value (px, %, ...) on the x and the y
+// axis. Advantage of using this over just repositioning the content, is the fact
+// that the positioning of the surrounding content, or the size of the containing
+// content, will not be afected.
+//
+// Example:
+// .translate(5px, 10%);
+//
+.translate(@x, @y) {
+  -webkit-transform: translate(@x, @y);
+     -moz-transform: translate(@x, @y);
+      -ms-transform: translate(@x, @y);
+       -o-transform: translate(@x, @y);
+          transform: translate(@x, @y);
+}
+ 
+// Skew
+// will rotate the edges of the element by a given amount in degrees, and distort
+// the content.
+// Expects values between 0deg and 90deg (Don't forget the 'deg'!)
+//
+// The first value (@x) affects the vertical edges.
+// The second value (@y) affects the horizontal edges.
+//
+// Example:
+// .skew(.5deg, 10deg)
+//
+.skew(@x, @y) {
+  -webkit-transform: skew(@x, @y);
+     -moz-transform: skewX(@x) skewY(@y);
+      -ms-transform: skewX(@x) skewY(@y);
+       -o-transform: skew(@x, @y);
+          transform: skew(@x, @y);
+}
+ 
+// -- Other Fancy Stuff -- //
+ 
+// Resizable
+// Allows the user to resize the element
+//
+// Options:
+// none:        The user cannot resize the element     
+// both:        The user can adjust both the height and the width of the element       
+// horizontal:  The user can adjust the width of the element   
+// vertical:    The user can adjust the height of the element
+//
+.resizable(@direction:both) {
+  resize: @direction; // Options: horizontal, vertical, both
+  overflow: auto; // Safari fix
+}
+ 
+// Columns
+// Creates a newspaper style layout by dividing the content into  a given number
+// of columns with a given gap.
+//
+// Example:
+// .columns(3, 20px);
+//
+.columns(@columnCount, @columnGap) {
+  -webkit-column-count: @columnCount;
+     -moz-column-count: @columnCount;
+          column-count: @columnCount;
+  -webkit-column-gap: @columnGap;
+     -moz-column-gap: @columnGap;
+          column-gap: @columnGap;
+}
+ 
+// Hyphens
+// For more info see here:
+// https://developer.mozilla.org/en-US/docs/CSS/hyphens
+//
+// Options:
+// auto: will cause the browser to try and split long words when a line break is required.
+// none: no words wil be split
+// manual: words will only split at previoulsy set locations (by adding &shy; inside the words)
+//
+.hyphens(@mode: auto) {
+  word-wrap: break-word;
+  -webkit-hyphens: @mode;
+     -moz-hyphens: @mode;
+      -ms-hyphens: @mode;
+       -o-hyphens: @mode;
+          hyphens: @mode;
+}
+ 
+// Opacity
+// Sets the opacity of an element, including all its content (background, borders, children, ..)
+// Expects a value between 0 and 100, where 100 is fully transparent
+//
+.opacity(@opacity: 0) {
+  opacity: @opacity / 100;
+  filter: ~"alpha(opacity=@{opacity})";
+}
+ 
+ 
+ 
+// -- Colors -- //
+//
+// Add an alphatransparency value to any background or border color
+.background-alpha(@color, @alpha: 1) {
+ 
+        @alphaColor: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+        @ieAlphaColor: argb(@alphaColor);
+ 
+        background-color: @color; // Fallback for older browsers
+        background-color: transparent\9;
+        background-color: @alphaColor;
+ 
+        // IE hacks
+        zoom: 1; // hasLayout
+        -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=@{ieAlphaColor}, endColorstr=@{ieAlphaColor})"; // IE 8+
+}
+ 
+.border-alpha(@color, @alpha: 1) {
+   border-color: hsla(hue(@color), saturation(@color), lightness(@color), @alpha);
+}
+ 
+// Gradients
+.gradient-horizontal(@startColor: @defaultGradientColor, @endColor: darken(@defaultGradientColor, 20%)) {
+   background-color: mix(@startColor, @endColor, 60%);
+   background-image: -moz-linear-gradient(left, @startColor, @endColor); // FF 3.6+
+   background-image: -webkit-gradient(linear, 0 0, 100% 0, from(@startColor), to(@endColor)); // Safari 4+, Chrome 2+
+   background-image: -webkit-linear-gradient(left, @startColor, @endColor); // Safari 5.1+, Chrome 10+
+   background-image: -o-linear-gradient(left, @startColor, @endColor); // Opera 11.10
+   background-image: linear-gradient(to right, @startColor, @endColor); // Standard, IE10
+   background-repeat: repeat-x;
+   filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=1)",argb(@startColor),argb(@endColor))); // IE9 and down
+}
+.gradient-vertical(@startColor: @defaultGradientColor, @endColor: darken(@defaultGradientColor, 20%)) {
+   background-color: mix(@startColor, @endColor, 60%);
+   background-image: -moz-linear-gradient(top, @startColor, @endColor); // FF 3.6+
+   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(@startColor), to(@endColor)); // Safari 4+, Chrome 2+
+   background-image: -webkit-linear-gradient(top, @startColor, @endColor); // Safari 5.1+, Chrome 10+
+   background-image: -o-linear-gradient(top, @startColor, @endColor); // Opera 11.10
+   background-image: linear-gradient(to bottom, @startColor, @endColor); // Standard, IE10
+   background-repeat: repeat-x;
+   filter: e(%("progid:DXImageTransform.Microsoft.gradient(startColorstr='%d', endColorstr='%d', GradientType=0)",argb(@startColor),argb(@endColor))); // IE9 and down
+}
+.gradient-directional(@startColor: @defaultGradientColor, @endColor: darken(@defaultGradientColor, 20%), @deg: 45deg) {
+   background-color: @endColor;
+   background-repeat: repeat-x;
+   background-image: -moz-linear-gradient(@deg, @startColor, @endColor); // FF 3.6+
+   background-image: -webkit-linear-gradient(@deg, @startColor, @endColor); // Safari 5.1+, Chrome 10+
+   background-image: -o-linear-gradient(@deg, @startColor, @endColor); // Opera 11.10
+   background-image: linear-gradient(@deg, @startColor, @endColor); // Standard, IE10
+}
+.gradient-radial(@innerColor: @defaultGradientcolor, @outerColor: darken(@defaultGradientColor, 20%))  {
+   background-color: @outerColor;
+   background-image: -webkit-gradient(radial, center center, 0, center center, 460, from(@innerColor), to(@outerColor));
+   background-image: -webkit-radial-gradient(circle, @innerColor, @outerColor);
+   background-image: -moz-radial-gradient(circle, @innerColor, @outerColor);
+   background-image: -o-radial-gradient(circle, @innerColor, @outerColor);
+   background-repeat: no-repeat;
+}
+.gradient-striped(@color: @defaultGradientColor, @angle: 45deg) {
+   background-color: @color;
+   background-image: -webkit-gradient(linear, 0 100%, 100% 0, color-stop(.25, rgba(255,255,255,.15)), color-stop(.25, transparent), color-stop(.5, transparent), color-stop(.5, rgba(255,255,255,.15)), color-stop(.75, rgba(255,255,255,.15)), color-stop(.75, transparent), to(transparent));
+   background-image: -webkit-linear-gradient(@angle, rgba(255,255,255,.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.15) 75%, transparent 75%, transparent);
+   background-image: -moz-linear-gradient(@angle, rgba(255,255,255,.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.15) 75%, transparent 75%, transparent);
+   background-image: -o-linear-gradient(@angle, rgba(255,255,255,.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.15) 75%, transparent 75%, transparent);
+   background-image: linear-gradient(@angle, rgba(255,255,255,.15) 25%, transparent 25%, transparent 50%, rgba(255,255,255,.15) 50%, rgba(255,255,255,.15) 75%, transparent 75%, transparent);
+}
+ 
+// -- Background Image -- //
+// shorthand for setting a background image
+// note: this uses the @defaultImagePath variable, so only filename should be used. If you use
+// a folder inside the images folder, you should include it as well, without /
+//
+// example:
+// .my-background-image {
+//              .background("custom-folder-inside-images/test.png");
+//      }
+.background(@fileName, @x:center, @y:center, @repeat:no-repeat, @color:transparent) {
+        background: @color url("@{defaultImageFolder}@{fileName}") @repeat @x @y;
+}
+.background-image(@fileName) {
+        background-image: url("@{defaultImageFolder}@{fileName}");
+}
+ 
+ 
+ 
+// -- mixins without parameters --
+// note the following mixins have the empty brackets () to force them to be interpreted as
+// mixins. This prevents them from showing up in the compiled stylesheet.
+ 
+// -- inline block
+// cross-browser fix for displaying elements as inline block
+// just add .display-inline-block; instead of the standard display: inline-block;
+.display-inline-block() {
+        display: -moz-inline-stack;
+        display: inline-block;
+        zoom: 1;
+        *display: inline;
+}
+ 
+// -- center block
+.center-block() {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+}
+ 
+// -- Text single line
+// Requires inline-block or block for proper styling
+// Will keep all text on 1 line and insert ... if required
+.text-single-line() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+ 
+// -- hide text
+// Source: https://github.com/h5bp/html5-boilerplate/commit/aa0396eae757
+// will hide the text of i.e. a link, so it can be replaced by i.e. an icon as background image
+.hide-text() {
+  font: 0/0 a;
+  color: transparent;
+  text-shadow: none;
+  background-color: transparent;
+  border: 0;
+}
+ 
+//-- force full height
+// Will force a block to take at least the height of it's parent, or even more if the content requires
+// it. Make sure you do net set any padding or margins on top or bottom of the blocks that use this
+// class, or you will get a height of more then 100%
+.force-full-height() {
+        min-height: 100%;
+        height: auto !important;
+        height: 100%;
+}
+ 
+// -- set placeholder color
+// Will set the placeholder color of input fields. Note that you can't call this mixin on the field itself
+// as it is a pseudo selector. Instead, you have to place it on its container, or anywhere else in the CSS file
+// on an element from which the input field inherits.
+//
+// NOTE: a fallback is included for IE8 and below, adding the color to .hint as well, which is typically
+// the CSS class added by the javascript plugin.
+.placeholder-color(@color) {
+    ::-webkit-input-placeholder { color: @color; opacity: 1 !important; }
+         :-ms-input-placeholder { color: @color; opacity: 1 !important; }
+             ::-moz-placeholder { color: @color; opacity: 1 !important; } /* Firefox 19+ */
+              :-moz-placeholder { color: @color; opacity: 1 !important; } /* Firefox 18- */
+                          .hint { color: @color; opacity: 1 !important; }
+}
+ 
+// -- box sizing
+//
+// Will apply the box-sizing CSS property with its correct prefixes for all compatible browsers
+.box-sizing(@value: @defaultBoxSizing) {
+    -webkit-box-sizing: @value;
+           -moz-box-sizing: @value;
+            -ms-box-sizing: @value;
+                box-sizing: @value;
+}

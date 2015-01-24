@@ -1,0 +1,488 @@
+/* =========================================================================
+ * Responsive
+ * Note: Mobile first approach
+ * =========================================================================
+ */
+
+
+/* =========================================================================
+ * 480px
+ * =========================================================================
+ */
+
+    @media only screen and (min-width : 30em) {
+
+	/* =========================================================================
+	 * Cols
+	 * =========================================================================
+	 */
+
+		.four-col {
+			margin-left: -2.5%;
+			>div {
+				width: 47.5%;
+				margin-left: 2.5%;
+				float: left;
+				/*margin-bottom: 2.5%;*/
+			}
+		}
+
+	/* =========================================================================
+	 * Header
+	 * =========================================================================
+	 */
+		header {
+			#main-menu {
+				&>ul {
+					&>li {
+						padding-left: 1.2em;
+						a {
+							font-size: 1em;
+						}
+					}
+				}
+			}
+		}
+
+    }
+
+/* =========================================================================
+ * 600px
+ * =========================================================================
+ */
+
+    @media only screen and (min-width: 37.5em) {
+
+		/* =========================================================================
+		 * Welkom
+		 * =========================================================================
+		 */
+			#welkom-bij-via-monastero, #bienvenue-a-via-monastero, #welcome-to-via-monastero  {
+				h2 {
+					font-size: 2.4em;
+					padding: 1.4em 0;
+				}
+			}
+
+		/* =========================================================================
+		 * Footer
+		 * =========================================================================
+		 */
+
+			footer {
+				.left {
+					float: left;
+					border: none;
+					text-align: left;
+				}
+				.right {
+					float: right;
+					text-align: right;
+					margin: 0;
+					background-position: left 17px top 5px;
+				}
+			}
+
+    }
+
+/* =========================================================================
+ * 768px
+ * =========================================================================
+ */
+
+    @media only screen and (min-width : 48em) {
+
+		.wrapper {
+			min-height: 100%;
+			height: auto !important;
+			height: 100%;
+			margin: 0 auto -290px;
+		}
+
+		footer, .footer-push {
+			height: 290px;
+		}
+
+		h3 {
+			text-align: left;
+			font-size: 2em;
+		}
+
+		.pagination {
+			float: right;
+			text-align: right;
+		}
+
+	/* =========================================================================
+	 * Cols
+	 * =========================================================================
+	 */
+
+		.four-col {
+			&.margin-bottom {
+				>div {
+					margin-bottom: 2.5%;
+				}
+			}
+			>div {
+				width: 22.5%;
+				margin-bottom:0;
+			}
+		}
+
+		.three-col {
+			margin-left: -5%;
+			padding-top: 0.5em;
+			>div {
+				float: left;
+				width: 28.33333%;
+				margin-left: 5%;
+				h4 {
+					text-align: left;
+				}
+			}
+		}
+
+	/* =========================================================================
+	 * Wrappers
+	 * =========================================================================
+	 */
+
+		.inner-wrapper, .nav-wrapper, .language-nav-wrapper, .content-wrapper {
+			width: 92%;
+		}
+
+		.language-nav-wrapper {
+			padding-top: 2.5em;
+		}
+
+	/* =========================================================================
+	 * Header
+	 * =========================================================================
+	 */
+		header {
+			position: relative;
+          .language-contact {
+            background-color: transparent;
+            padding: 0;
+            float: left;
+            .inner-wrapper {
+              width: auto;
+            }
+            .language-selection, .contact-icons {
+              float: left;
+            }
+            .contact-icons .numbers {
+              top: 3em;
+              margin-left: -65px;
+              background-color: transparent;
+            }
+          }
+
+			.nav-wrapper {
+				width: auto;
+				float: right;
+			}
+
+			#main-menu {
+				padding: 0;
+				&>ul>li {
+					padding-left: 1.8em;
+					.submenu {
+						top: 3em;
+						margin-left: -45px;
+						background-color: transparent;
+					}
+				}
+			}
+
+			#logo {
+				padding: 5em 0 1.5em 0;
+			}
+
+			h1 {
+				font-size: 2.3em;
+				line-height: 1.5em;
+			}
+
+			.btn-options {
+				margin-top: 4em;
+				li {
+					margin-bottom: 0.75em;
+					display: inline-block;
+					margin-left: 2em;
+					&:first-child {
+						margin: 0;
+					}
+					a {
+                      width: 220px;// ROBBERT
+                      padding: 0;// ROBBERT
+					}
+				}
+			}
+
+			#slider {
+				.opacity(13);
+				display: block;
+				img {
+					position: absolute;
+					z-index: -999;
+					bottom: 0;
+					top: 0;
+					left: 0;
+					min-height: 100%;
+					right: 0;
+					width: 100%;
+				}
+			}
+
+			.arrow .scroll-down {
+				margin: 3em 0 3em 0;
+			}
+
+			// Header for subpages
+			&.subpage {
+				position: relative;
+				height: 117px;
+				overflow: visible;
+				.language-nav-wrapper {
+					padding-top: 3.2em;
+				}
+				#logo {
+					top: 0;
+					padding: 0;
+					top: 2em;
+					left: 50%;
+					margin-left: -32px;
+					z-index: 9999;
+					width: 65px;
+					position: absolute;
+					.inner-wrapper {
+						width: auto;
+					}
+				}
+				#main-menu ul>li {
+					padding-left: 1.2em;
+					.submenu {
+
+						background-color: white;
+
+						top: 5.2em;
+						li {
+							padding-left: 0;
+							a {
+								color: #4c4645;
+								border-color: #d6d5d5;
+								&:hover, &:focus, &.active {
+									color: @orange;
+								}
+							}
+						}
+					}
+				}
+
+              .contact-icons>li {
+                .numbers {
+                  top: 5.2em;
+                  background-color: #fff;
+                  li {
+                    padding-left: 0;
+                    color: #4c4645;
+                    border-color: #d6d5d5;
+                    a {
+                      color: #4c4645;
+                      border-color: #d6d5d5;
+                      &:hover, &:focus, &.active {
+                        color: @orange;
+                      }
+                    }
+                  }
+                }
+              }
+
+				#main-menu ul>li>a {
+					.normal();
+                  font-size: 1em;//ROBBERT
+
+				}
+
+
+			}
+		}
+
+		/* =========================================================================
+		 * Nieuwe stukken
+		 * =========================================================================
+		 */
+			#nieuwe-stukken {
+				margin: 5em 0;
+			}
+
+		/* =========================================================================
+		 * Wie zijn we
+		 * =========================================================================
+		 */
+			#wie-zijn-we, #who-are-we, #qui-sommes-nous {
+				padding: 4.5em 0;
+				p {
+					font-size: 1.3em;
+					line-height: 2.2em;
+				}
+			}
+
+		/* =========================================================================
+		 * Wat doen we
+		 * =========================================================================
+		 */
+			#wat-doen-we, #what-we-do, #ce-do-nous {
+				padding: 5em 0;
+			}
+
+		/* =========================================================================
+		 * Content
+		 * =========================================================================
+		 */
+
+			#content {
+				padding: 5em 0;
+			}
+
+
+		/* =========================================================================
+		 * Footer
+		 * =========================================================================
+		 */
+
+			footer {
+				padding: 0;
+				position: relative;
+				.margin {
+					padding-top: 4.75em;
+				}
+				.copyright-social {
+					position: absolute;
+					width: 168px;
+					left: 50%;
+					top: 6.5em;
+					margin: 0 0 0 -84px;
+					p {
+						margin-top: 1.05em;
+					}
+				}
+			}
+
+    }
+
+/* =========================================================================
+ * 900px
+ * =========================================================================
+ */
+
+    @media only screen and (min-width : 56.25em) {
+
+		/* =========================================================================
+		 * FORM
+		 * =========================================================================
+		 */
+
+
+
+			form#form-antiek-verkopen, form.form-antiek-verkopen, form.form-intresse  {
+				margin-top: 3em;
+
+				fieldset {
+					legend {
+						text-align: left;
+					}
+					.gfield_radio li, .radio-wrapper {
+						display: inline-block;
+						font-size: 1.1em;
+
+						float: left;
+
+
+						input {
+							margin-left: .1em !important;
+						}
+
+
+						label {
+							margin-left : 0px;
+                          padding-top: 0; //ROBBERT
+						}
+						&.right, &:last-child {
+							float: right;
+						}
+						&.left {
+							float: left;
+						}
+					}
+				}
+				#step1 {
+					width: 60%;
+		 			float: left;
+				}
+				#step2 {
+					width: 30%;
+					float: right;
+				}
+				#step3 {
+					float: left;
+					width: 60%;
+					margin-top: 1.3em;
+					.left {
+						float: left;
+						width: 45%;
+					}
+					.right {
+						float: right;
+						width: 45%;
+					}
+				}
+			}
+
+    }
+
+/* =========================================================================
+ * 1024px
+ * =========================================================================
+ */
+
+    @media only screen and (min-width : 64em) {
+
+	.three-col {
+		margin-left: -73.3333333px;
+		>div {
+			float: left;
+			width: 240px;
+			margin-left: 73.3333333px;
+		}
+	}
+
+	header h1 {
+		font-size: 2.8em;
+		line-height: 1.6em;
+	}
+
+	/* =========================================================================
+	 * Wrappers
+	 * =========================================================================
+	 */
+
+		.inner-wrapper, .nav-wrapper, .language-nav-wrapper, .content-wrapper, .content-wrapper {
+			width: 940px;
+		}
+
+    }
+
+/* =========================================================================
+ * 1200px
+ * =========================================================================
+ */
+
+    @media only screen and (min-width : 75em) {
+
+
+
+    }
+

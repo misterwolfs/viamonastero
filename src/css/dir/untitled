@@ -1,0 +1,52 @@
+/* =========================================================================
+ * Wie zijn we
+ * =========================================================================
+ */
+      #wie-zijn-we, #who-are-we, #qui-sommes-nous {
+            background-color: #38312f;
+            background-image: url('../img/wie-zijn-we.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 2em 0;
+            p {
+                  color: @white;
+                  font-size: 1.1em;
+                  line-height: 2em;
+            }
+      }
+
+/* =========================================================================
+ * Wat doen we
+ * =========================================================================
+ */
+      #wat-doen-we, #what-we-do, #ce-do-nous {
+            background-color: @grey;
+            padding: 2em 0;
+            .three-col {
+                  &>div {
+                        p {
+                              font-size: 0.9em;
+                              line-height: 2.2em;
+                        }
+                        h4 {
+                              margin-bottom: 0.5em;
+                        }
+                  }
+            }
+      }
+
+
+
+      .page-numbers {
+                  padding-left: 0.2em;
+
+                  color: #202020;
+                              font-size: 1.2em;
+                              text-decoration: none;
+                              &:hover, &:focus {
+                                    color: @orange;
+                              }
+                              &.current {
+                                    .semibold();
+                              }
+            }
